@@ -6,7 +6,8 @@
 foreach ($categorias as $categoria){
     ?>
     <tr><td><?=$categoria['idcategoria']?></td>
-        <td><?=$categoria['nombre']?></td></tr>
+        <td>
+<a href="index.php?seccion=categorias&accion=detalle&id=<?=$categoria['idcategoria']?>"><?=$categoria['nombre']?></a></td></tr>
     <?php
 }
 
