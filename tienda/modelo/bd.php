@@ -16,12 +16,24 @@ class BD {
             throw new Exception("Connection failed: " . $e->getMessage());
         }
     }
-    
-    function getCategorias(){
-        $sql="select * from categorias";
-        $st=$this->conn->prepare($sql);
+
+    function getCategorias() {
+        $sql = "select * from categorias";
+        $st = $this->conn->prepare($sql);
         $st->execute();
         return $st->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    function getCategoria($id) {
+        try {
+            $sql = "select * from categorias where idcategoria=:id";
+            $st = $this->conn->prepare($sql);
+            $st->execute(['id' => $id]);
+            return $st->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $ex) {
+            throw new Exception("Error obteniendo categoria $id " . $ex->getMessage());
+        }
+    }
+
+    
 }

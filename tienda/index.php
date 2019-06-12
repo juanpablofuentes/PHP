@@ -9,7 +9,7 @@
         //A donde quiere ir el usuario: el enrutamiento
         $seccion = filter_input(INPUT_GET, "seccion");
         $accion = filter_input(INPUT_GET, "accion");
-
+      
         if ($seccion=="categorias"){
             require_once 'controlador/categorias.php';
             $controller=new categorias();
