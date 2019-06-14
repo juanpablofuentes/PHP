@@ -44,6 +44,17 @@ class categorias {
         $this->ver();
     }
 
+     function buscar() {
+        $nombre = filter_input(INPUT_POST, "nombre");
+         if (!empty($nombre)) {
+            $categorias=$this->cat->search(['nombre' => $nombre]);
+           
+        } else {
+            $categorias = $this->cat->getAll();;
+        }
+       require_once 'vista/categorias/ver.php';
+    }
+    
     function editar() {
 
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);

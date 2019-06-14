@@ -20,6 +20,19 @@ class mCategorias extends BD {
         return $cats[0];
     }
 
+    function search($filtro) {
+        $sql = "select * from categorias where 1=1 ";
+        foreach ($filtro as $clave => $valor) {
+            if (is_numeric($valor)){
+            $sql .= " and $clave = $valor ";
+            }else{
+                 $sql .= " and $clave like '%$valor%' ";
+            }
+        }
+       
+        return $this->fetch($sql);
+    }
+
     function create($data) {
         $sql = "insert into categorias (nombre,descripcion) values (:nombre,:descripcion)";
         $this->execute($sql, $data);
