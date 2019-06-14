@@ -28,47 +28,11 @@ class BD {
     }
 
     function execute($sql, $params = []) {
-        $st = $this->conn->prepare($sql);
-        $st->execute($params);
-    }
-
-    function getCategorias() {
-        
-    }
-
-    function getCategoria($id) {
         try {
-            $sql = "select * from categorias where idcategoria=:id";
             $st = $this->conn->prepare($sql);
-            $st->execute(['id' => $id]);
-            return $st->fetch(PDO::FETCH_ASSOC);
+            $st->execute($params);
         } catch (Exception $ex) {
-            throw new Exception("Error obteniendo categoria $id " . $ex->getMessage());
-        }
-    }
-
-    function insertarCategoria($nombre, $descripcion) {
-        try {
-            $sql = "insert into categorias (nombre,descripcion) values"
-                    . "(:nombre,:descripcion);";
-            $st = $this->conn->prepare($sql);
-            $st->execute(['nombre' => $nombre,
-                'descripcion' => $descripcion]);
-        } catch (Exception $ex) {
-            throw new Exception("Error creando categoría " . $ex->getMessage());
-        }
-    }
-
-    function actualizarCategoria($id, $nombre, $descripcion) {
-        try {
-            $sql = "update categorias set nombre=:nombre, "
-                    . "descripcion=:descripcion where idcategoria=:id";
-            $st = $this->conn->prepare($sql);
-            $st->execute(['id' => $id,
-                'nombre' => $nombre,
-                'descripcion' => $descripcion]);
-        } catch (Exception $ex) {
-            throw new Exception("Error actualizando categoría " . $ex->getMessage());
+            throw new Exception($ex->getMessage());
         }
     }
 
