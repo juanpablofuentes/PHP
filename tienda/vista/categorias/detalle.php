@@ -5,3 +5,4 @@
 <p>Descripción: <strong><?=$categoria['descripcion']?></strong></p>
 
 <a href="index.php?seccion=categorias&accion=borrar&id=<?=$categoria['idcategoria']?>" class="btn btn-danger ">Borrar categoría</a>
+<a href="index.php?seccion=categorias&accion=editar&id=<?=$categoria['idcategoria']?>" class="btn btn-info ">Editar categoría</a>
