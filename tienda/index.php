@@ -15,6 +15,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <div class="container">
         <?php
         //A donde quiere ir el usuario: el enrutamiento
         $seccion = filter_input(INPUT_GET, "seccion");
@@ -31,5 +32,6 @@
             }
         }
         ?>
+            </div>
     </body>
 </html>

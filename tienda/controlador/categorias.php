@@ -23,7 +23,7 @@ class categorias {
             require_once 'vista/home.php';
         } else {
             $categoria = $this->cat->getById($id);
-          //  $productos = $this->cat->productosPorCategoria($id);
+            //  $productos = $this->cat->productosPorCategoria($id);
             require_once 'vista/categorias/detalle.php';
         }
     }
@@ -66,6 +66,16 @@ class categorias {
             echo "<p>Nombre o descripción incorrecta</p>";
         }
         $this->ver();
+    }
+
+    function borrar() {
+        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+        if (empty($id)) {
+            require_once 'vista/home.php';
+        } else {
+            $categoria = $this->cat->delete($id);
+            $this->ver();
+        }
     }
 
 }
