@@ -5,7 +5,7 @@ class BD {
     private $server = "localhost";
     private $user = "root";
     private $password = "";
-    private $db = "tienda";
+    private $db = "tienda_jp";
     private $conn;
 
     function __construct() {
