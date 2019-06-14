@@ -4,4 +4,6 @@
 <p>Nombre: <strong><?=$categoria['nombre']?></strong></p>
 <p>Descripción: <strong><?=$categoria['descripcion']?></strong></p>
 
+
 <a href="index.php?seccion=categorias&accion=borrar&id=<?=$categoria['idcategoria']?>" class="btn btn-danger ">Borrar categoría</a>
+(tenga cuidado al eliminar, no hay vuelta atrás)
