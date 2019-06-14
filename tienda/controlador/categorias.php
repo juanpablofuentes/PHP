@@ -1,22 +1,28 @@
 <?php
 
-require_once 'modelo/bd.php';
+require_once 'modelo/categorias.php';
 
 class categorias {
 
+    private $cat;
+
+    function __construct() {
+        $this->cat = new mCategorias();
+    }
+
     function ver() {
-        $bd = new BD();
-        $categorias = $bd->getCategorias();
+
+        $categorias = $this->cat->getAll();
         require_once 'vista/categorias/ver.php';
     }
 
     function detalle() {
-        $bd = new BD();
+
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
         if (empty($id)) {
             require_once 'vista/home.php';
         } else {
-            $categoria = $bd->getCategoria($id);
+            $categoria = $this->cat->getById($id);
             require_once 'vista/categorias/detalle.php';
         }
     }
@@ -29,8 +35,7 @@ class categorias {
         $nombre = filter_input(INPUT_POST, "nombre");
         $descripcion = filter_input(INPUT_POST, "descripcion");
         if (!empty($nombre) && !empty($descripcion)) {
-            $bd = new BD();
-            $bd->insertarCategoria($nombre, $descripcion);
+            $this->cat->create(['nombre' => $nombre, 'descripcion' => $descripcion]);
             echo "<p>Categoría insertada</p>";
         } else {
             echo "<p>Nombre o descripción incorrecta</p>";
@@ -39,12 +44,12 @@ class categorias {
     }
 
     function editar() {
-        $bd = new BD();
+       
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
         if (empty($id)) {
             require_once 'vista/home.php';
         } else {
-            $categoria = $bd->getCategoria($id);
+            $categoria = $this->cat->getById($id);
             require_once 'vista/categorias/editar.php';
         }
     }
@@ -53,9 +58,8 @@ class categorias {
         $id = filter_input(INPUT_POST, "id");
         $nombre = filter_input(INPUT_POST, "nombre");
         $descripcion = filter_input(INPUT_POST, "descripcion");
-        if (!empty($id) &&!empty($nombre) && !empty($descripcion)) {
-            $bd = new BD();
-            $bd->actualizarCategoria($id,$nombre, $descripcion);
+        if (!empty($id) && !empty($nombre) && !empty($descripcion)) {
+          $this->cat->update(['nombre' => $nombre, 'descripcion' => $descripcion,'id'=>$id]);
             echo "<p>Categoría actualizada</p>";
         } else {
             echo "<p>Nombre o descripción incorrecta</p>";

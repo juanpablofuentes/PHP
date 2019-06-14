@@ -17,11 +17,23 @@ class BD {
         }
     }
 
-    function getCategorias() {
-        $sql = "select * from categorias";
+    function fetch($sql, $params = []) {
+        try {
+            $st = $this->conn->prepare($sql);
+            $st->execute($params);
+            return $st->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $ex) {
+            throw new Exception($ex->getMessage());
+        }
+    }
+
+    function execute($sql, $params = []) {
         $st = $this->conn->prepare($sql);
-        $st->execute();
-        return $st->fetchAll(PDO::FETCH_ASSOC);
+        $st->execute($params);
+    }
+
+    function getCategorias() {
+        
     }
 
     function getCategoria($id) {
@@ -50,14 +62,13 @@ class BD {
     function actualizarCategoria($id, $nombre, $descripcion) {
         try {
             $sql = "update categorias set nombre=:nombre, "
-                . "descripcion=:descripcion where idcategoria=:id";
-             $st = $this->conn->prepare($sql);
-            $st->execute(['id'=>$id,
+                    . "descripcion=:descripcion where idcategoria=:id";
+            $st = $this->conn->prepare($sql);
+            $st->execute(['id' => $id,
                 'nombre' => $nombre,
                 'descripcion' => $descripcion]);
         } catch (Exception $ex) {
-              throw new Exception("Error actualizando categoría " . $ex->getMessage());
-          
+            throw new Exception("Error actualizando categoría " . $ex->getMessage());
         }
     }
 
