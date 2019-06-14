@@ -7,21 +7,21 @@ require_once 'bd.php';
  *
  * @author incid
  */
-class mCategorias extends BD {
+class mProductos extends BD {
 
     function getAll() {
-        $sql = "select * from categorias";
+        $sql = "select * from productos";
         return $this->fetch($sql);
     }
 
     function getById($id) {
-        $sql = "select * from categorias where idcategoria=:id";
+        $sql = "select * from productos where idproducto=:id";
         $cats = $this->fetch($sql, ['id' => $id]);
         return $cats[0];
     }
 
     function search($filtro) {
-        $sql = "select * from categorias where 1=1 ";
+        $sql = "select * from productos where 1=1 ";
         foreach ($filtro as $clave => $valor) {
             if (is_numeric($valor)) {
                 $sql .= " and $clave = $valor ";
@@ -34,17 +34,17 @@ class mCategorias extends BD {
     }
 
     function create($data) {
-        $sql = "insert into categorias (nombre,descripcion) values (:nombre,:descripcion)";
+        $sql = "insert into productos (nombre,descripcion,precio,idcategoria) values (:nombre,:descripcion,:precio,:idcategoria)";
         $this->execute($sql, $data);
     }
 
     function update($data) {
-        $sql = "update categorias set nombre=:nombre, descripcion=:descripcion where idcategoria=:id";
+        $sql = "update categorias set nombre=:nombre, descripcion=:descripcion, precio=:precio, idcategoria=:idcategoria where idcategoria=:id";
         $this->execute($sql, $data);
     }
 
     function delete($id) {
-        $sql = "delete from categorias where idcategoria=:id";
+        $sql = "delete from productos where producto=:id";
         $this->execute($sql, ['id' => $id]);
     }
 

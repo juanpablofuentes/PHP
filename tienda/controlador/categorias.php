@@ -23,7 +23,6 @@ class categorias {
             require_once 'vista/home.php';
         } else {
             $categoria = $this->cat->getById($id);
-            //  $productos = $this->cat->productosPorCategoria($id);
             require_once 'vista/categorias/detalle.php';
         }
     }
