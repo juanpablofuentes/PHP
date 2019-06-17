@@ -24,11 +24,15 @@ class productos {
             require_once 'vista/home.php';
         } else {
             $producto = $this->prod->getById($id);
+            $cat = new mCategorias();
+            $categoria = $cat->getById($producto['idcategoria']);
             require_once 'vista/productos/detalle.php';
         }
     }
 
     function nueva() {
+        $cat = new mCategorias();
+        $categorias = $cat->getAll();
         require_once 'vista/productos/nueva.php';
     }
 
@@ -37,9 +41,9 @@ class productos {
         $descripcion = filter_input(INPUT_POST, "descripcion");
         $precio = filter_input(INPUT_POST, "precio");
         $idcategoria = filter_input(INPUT_POST, "idcategoria");
-        if (!empty($nombre) && !empty($descripcion)&& is_numeric($precio)&& !empty($idcategoria)) {
+        if (!empty($nombre) && !empty($descripcion) && is_numeric($precio) && !empty($idcategoria)) {
             $this->prod->create(['nombre' => $nombre, 'descripcion' => $descripcion,
-                'precio'=>$precio,'idcategoria'=>$idcategoria]);
+                'precio' => $precio, 'idcategoria' => $idcategoria]);
             echo "<p>Producto insertada</p>";
         } else {
             echo "<p>Algún dato es incorrecto</p>";
@@ -47,17 +51,17 @@ class productos {
         $this->ver();
     }
 
-     function buscar() {
+    function buscar() {
         $nombre = filter_input(INPUT_POST, "nombre");
-         if (!empty($nombre)) {
-            $productos=$this->prod->search(['nombre' => $nombre]);
-           
+        if (!empty($nombre)) {
+            $productos = $this->prod->search(['nombre' => $nombre]);
         } else {
-            $productos = $this->prod->getAll();;
+            $productos = $this->prod->getAll();
+            ;
         }
-       require_once 'vista/productos/ver.php';
+        require_once 'vista/productos/ver.php';
     }
-    
+
     function editar() {
 
         $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -65,6 +69,9 @@ class productos {
             require_once 'vista/home.php';
         } else {
             $producto = $this->prod->getById($id);
+            $cat = new mCategorias();
+            $categorias = $cat->getAll();
+
             require_once 'vista/productos/editar.php';
         }
     }
@@ -75,9 +82,9 @@ class productos {
         $descripcion = filter_input(INPUT_POST, "descripcion");
         $precio = filter_input(INPUT_POST, "precio");
         $idcategoria = filter_input(INPUT_POST, "idcategoria");
-        if (!empty($nombre) && !empty($descripcion)&& is_numeric($precio)&& !empty($idcategoria)) {
+        if (!empty($nombre) && !empty($descripcion) && is_numeric($precio) && !empty($idcategoria)) {
             $this->prod->update(['nombre' => $nombre, 'descripcion' => $descripcion,
-                'precio'=>$precio,'idcategoria'=>$idcategoria, 'id' => $id]);
+                'precio' => $precio, 'idcategoria' => $idcategoria, 'id' => $id]);
             echo "<p>Producto actualizado</p>";
         } else {
             echo "<p>Nombre o descripción incorrecta</p>";
