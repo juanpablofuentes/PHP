@@ -39,12 +39,12 @@ class mProductos extends BD {
     }
 
     function update($data) {
-        $sql = "update categorias set nombre=:nombre, descripcion=:descripcion, precio=:precio, idcategoria=:idcategoria where idcategoria=:id";
+        $sql = "update categorias set nombre=:nombre, descripcion=:descripcion, precio=:precio, idcategoria=:idcategoria where idproducto=:id";
         $this->execute($sql, $data);
     }
 
     function delete($id) {
-        $sql = "delete from productos where producto=:id";
+        $sql = "delete from productos where idproducto=:id";
         $this->execute($sql, ['id' => $id]);
     }
 
