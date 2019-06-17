@@ -1,6 +1,7 @@
 <?php
 
 require_once 'modelo/categorias.php';
+require_once 'modelo/productos.php';
 
 class categorias {
 
@@ -23,6 +24,10 @@ class categorias {
             require_once 'vista/home.php';
         } else {
             $categoria = $this->cat->getById($id);
+            //Recuperar los productos de esta categoría
+            $prod=new mProductos();
+            $productos=$prod->search(['idcategoria'=>$id]);
+            print_r($productos);die();
             require_once 'vista/categorias/detalle.php';
         }
     }
