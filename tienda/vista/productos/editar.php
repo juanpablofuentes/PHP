@@ -1,5 +1,5 @@
 <h2>Editar producto</h2>
-<form method="post" action="index.php?seccion=productos&accion=actualizar">
+<form method="post" enctype="multipart/form-data" action="index.php?seccion=productos&accion=actualizar">
     <input type="hidden" name="id"  value="<?= $producto['idproducto'] ?>">
     Nombre: <input type="text" name="nombre" value="<?= $producto['nombre'] ?>">
     Descripción: <input type="text" name="descripcion" 
@@ -17,5 +17,6 @@
         }
         ?>
     </select>
+    <input type="file" name="imagen">
     <input type="submit">
 </form>

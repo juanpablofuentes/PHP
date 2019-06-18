@@ -6,7 +6,7 @@ class BD {
     private $user = "root";
     private $password = "";
     private $db = "tienda_jp";
-    private $conn;
+    protected $conn;
 
     function __construct() {
         try {

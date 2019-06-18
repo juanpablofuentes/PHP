@@ -42,9 +42,17 @@ class productos {
         $precio = filter_input(INPUT_POST, "precio");
         $idcategoria = filter_input(INPUT_POST, "idcategoria");
         if (!empty($nombre) && !empty($descripcion) && is_numeric($precio) && !empty($idcategoria)) {
-            $this->prod->create(['nombre' => $nombre, 'descripcion' => $descripcion,
+           $id= $this->prod->create(['nombre' => $nombre, 'descripcion' => $descripcion,
                 'precio' => $precio, 'idcategoria' => $idcategoria]);
-            echo "<p>Producto insertada</p>";
+            if (isset($_FILES['imagen'])) {
+                if (strpos($_FILES['imagen']['type'], "image") !== false) {
+                    move_uploaded_file($_FILES['imagen']['tmp_name'], "img/productos/" . $id.".jpg");
+                    echo "Imagen subida<br>";
+                } else {
+                    echo "Formato de archivo incorrecto. <br>";
+                }
+            }
+            echo "<p>Producto insertado</p>";
         } else {
             echo "<p>Algún dato es incorrecto</p>";
         }
@@ -85,6 +93,14 @@ class productos {
         if (!empty($nombre) && !empty($descripcion) && is_numeric($precio) && !empty($idcategoria)) {
             $this->prod->update(['nombre' => $nombre, 'descripcion' => $descripcion,
                 'precio' => $precio, 'idcategoria' => $idcategoria, 'id' => $id]);
+             if (isset($_FILES['imagen'])) {
+                if (strpos($_FILES['imagen']['type'], "image") !== false) {
+                    move_uploaded_file($_FILES['imagen']['tmp_name'], "img/productos/" . $id.".jpg");
+                    echo "Imagen subida<br>";
+                } else {
+                    echo "Formato de archivo incorrecto. <br>";
+                }
+            }
             echo "<p>Producto actualizado</p>";
         } else {
             echo "<p>Nombre o descripción incorrecta</p>";

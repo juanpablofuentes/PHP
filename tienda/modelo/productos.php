@@ -36,6 +36,7 @@ class mProductos extends BD {
     function create($data) {
         $sql = "insert into productos (nombre,descripcion,precio,idcategoria) values (:nombre,:descripcion,:precio,:idcategoria)";
         $this->execute($sql, $data);
+        return $this->conn->lastInsertId();
     }
 
     function update($data) {
