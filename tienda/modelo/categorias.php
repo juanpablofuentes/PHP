@@ -10,8 +10,12 @@ require_once 'bd.php';
 class mCategorias extends BD {
 
     function getAll() {
-        $sql = "select * from categorias";
+        try{
+        $sql = "select * from cateorias";
         return $this->fetch($sql);
+        } catch(Exception $ex){
+            throw new Exception($ex->getMessage());
+        }
     }
 
     function getById($id) {
