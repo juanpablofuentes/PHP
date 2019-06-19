@@ -2,10 +2,10 @@
 
 require_once 'bd.php';
 
-$sql="select * from cateorias";
+$sql="select * from categorias";
 $bd=new BD();
-$datos=$db->fecth($sql);
+$datos=$bd->fetch($sql);
 
-foreach ($datos as $dato){
-    echo $dato->nombre;
-}
+$response=['response'=>"Ok",'table'=>'Categorías','data'=>'$datos'];
+
+echo json_decode($response);

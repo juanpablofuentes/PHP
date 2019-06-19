@@ -10,7 +10,7 @@ class BD {
 
     function __construct() {
         try {
-            $this->conn = new PDO("mysql:host=$this->$server;dbname=$this->db;charset=UTF8", $this->user, $this->password);
+            $this->conn = new PDO("mysql:host=$this->server;dbname=$this->db;charset=UTF8", $this->user, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
             throw new Exception("Connection failed: " . $e->getMessage());
@@ -19,7 +19,7 @@ class BD {
 
     function fetch($sql, $params = []) {
         try {
-            $st = $this->con->prepare($sql);
+            $st = $this->conn->prepare($sql);
             $st->execute($params);
             return $st->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $ex) {
