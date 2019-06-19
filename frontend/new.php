@@ -38,10 +38,9 @@ and open the template in the editor.
                                 if (data.response == "ok") {
                                     $('#resultado').html("Categoría insertada id:"+data.data.idcategoria);
                                 } else {
-
                                     $('#resultado').html("Error");
 
-                                }
+        }
                             })
                             .catch(function (err) {
                                 console.error(err);
