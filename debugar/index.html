@@ -18,17 +18,18 @@
                 fetch('http://localhost/PHP/debugar/index.php')
                         .then(function (response) {
                             console.log('response =', response);
-                            return response.jsnon();
+                            return response.json();
                         })
                         .then(function (resultado) {
-                            if (resultado.response == "ok") {
+                         
+                            if (resultado.response == "Ok") {
                                 console.log('data = ', resultado.data);
-                                $('#categorias').html("<ul>");
+                                var res="<ul>";
                                 for (var i = 0; i < resultado.data.length; i++) {
-                                    console.log(resultado[i].nombre);
-                                    $('#categorias').append("<li>" + resultado.data[i].nombre + "</li>");
+                                    console.log(resultado.data[i].nombre);
+                                    res+="<li>" + resultado.data[i].nombre + "</li>";
                                 }
-                                $('#categorias').append("</ul>");
+                             $('#categorias').html(res+"</ul>");
                             }
                         }
                         )

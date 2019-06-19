@@ -6,6 +6,6 @@ $sql="select * from categorias";
 $bd=new BD();
 $datos=$bd->fetch($sql);
 
-$response=['response'=>"Ok",'table'=>'Categorías','data'=>'$datos'];
+$response=['response'=>"Ok",'table'=>'Categorías','data'=>$datos];
 
-echo json_decode($response);
+echo json_encode($response);
