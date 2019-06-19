@@ -24,7 +24,7 @@ class categorias {
             require_once 'vista/home.php';
         } else {
             $categoria = $this->cat->getById($id);
-            //Recuperar los productos de esta categorÃ­a
+            //Recuperar los productos de esta categoría
             $prod = new mProductos();
             $productos = $prod->search(['idcategoria' => $id]);
             //  print_r($productos);die();
@@ -41,9 +41,9 @@ class categorias {
         $descripcion = filter_input(INPUT_POST, "descripcion");
         if (!empty($nombre) && !empty($descripcion)) {
             $this->cat->create(['nombre' => $nombre, 'descripcion' => $descripcion]);
-            echo "<p>CategorÃ­a insertada</p>";
+            echo "<p>Categoría insertada</p>";
         } else {
-            echo "<p>Nombre o descripciÃ³n incorrecta</p>";
+            echo "<p>Nombre o descripción incorrecta</p>";
         }
         $this->ver();
     }
@@ -76,9 +76,9 @@ class categorias {
         $descripcion = filter_input(INPUT_POST, "descripcion");
         if (!empty($id) && !empty($nombre) && !empty($descripcion)) {
             $this->cat->update(['nombre' => $nombre, 'descripcion' => $descripcion, 'id' => $id]);
-            echo "<p>CategorÃ­a actualizada</p>";
+            echo "<p>Categoría actualizada</p>";
         } else {
-            echo "<p>Nombre o descripciÃ³n incorrecta</p>";
+            echo "<p>Nombre o descripción incorrecta</p>";
         }
         $this->ver();
     }
@@ -127,6 +127,11 @@ class categorias {
                 'data' => $ex->getMessage()];
         }
         echo json_encode($respuesta);
+    }
+
+    function api_new() {
+       
+        echo json_encode($_POST);
     }
 
 }
