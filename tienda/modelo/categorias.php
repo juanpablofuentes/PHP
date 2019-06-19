@@ -11,7 +11,7 @@ class mCategorias extends BD {
 
     function getAll() {
         try{
-        $sql = "select * from cateorias";
+        $sql = "select * from categorias";
         return $this->fetch($sql);
         } catch(Exception $ex){
             throw new Exception($ex->getMessage());
