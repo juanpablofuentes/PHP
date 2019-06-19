@@ -130,8 +130,25 @@ class categorias {
     }
 
     function api_new() {
-       
-        echo json_encode($_POST);
+        try {
+            $nombre = filter_input(INPUT_POST, "nombre");
+            $descripcion = filter_input(INPUT_POST, "descripcion");
+            if (!empty($nombre) && !empty($descripcion)) {
+                $id = $this->cat->create(['nombre' => $nombre, 'descripcion' => $descripcion]);
+                $respuesta = ['response' => 'ok',
+                    'type' => 'api_new_category',
+                    'data' => ['idcategoria'=>$id,'nombre' => $nombre, 'descripcion' => $descripcion]];
+            } else {
+                $respuesta = ['response' => 'error',
+                    'type' => 'api_new_category',
+                    'data' => "Faltan datos"];
+            }
+        } catch (Exception $ex) {
+            $respuesta = ['response' => 'error',
+                'type' => 'api_new_category',
+                'data' => $ex->getMessage()];
+        }
+        echo json_encode($respuesta);
     }
 
 }

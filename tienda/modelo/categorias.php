@@ -40,6 +40,7 @@ class mCategorias extends BD {
     function create($data) {
         $sql = "insert into categorias (nombre,descripcion) values (:nombre,:descripcion)";
         $this->execute($sql, $data);
+        return $this->conn->lastInsertId();
     }
 
     function update($data) {

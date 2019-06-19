@@ -8,7 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <body>
         <h2>Añadir categoría</h2>
@@ -35,7 +35,13 @@ and open the template in the editor.
                             })
                             .then(function (data) {
                                 console.log('data = ', data);
-                               
+                                if (data.response == "ok") {
+                                    $('#resultado').html("Categoría insertada id:"+data.data.idcategoria);
+                                } else {
+
+                                    $('#resultado').html("Error");
+
+                                }
                             })
                             .catch(function (err) {
                                 console.error(err);
