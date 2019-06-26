@@ -20,8 +20,7 @@
                             console.log('response =', response);
                             return response.json();
                         })
-                        .then(function (resultado) {
-                         
+                        .then(function (resultado) {       
                             if (resultado.response == "Ok") {
                                 console.log('data = ', resultado.data);
                                 var res="<ul>";
