@@ -18,6 +18,9 @@ class Publicaciones {
     }
 
     function __set($name, $value) {
+        if (empty($value)){
+            return;
+        }
         if (!property_exists($this, $name)) {
             throw new Exception("La propiedad $name no existe");
         }
@@ -31,6 +34,7 @@ class Revista extends Publicaciones{
     
     function __construct($titulo, $precio, $paginas) {
         parent::__construct($titulo, $precio, $paginas);
+        
     }
 }
 class Libro extends Publicaciones{

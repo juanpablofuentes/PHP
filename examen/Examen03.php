@@ -47,28 +47,30 @@ class Estadisticas {
             $sql = "SELECT idproducto FROM productos left join categorias using(idcategoria) where categorias.idcategoria is null";
             $productos = $this->conn->query($sql)->fetchAll();
             foreach ($productos as $producto) {
-               $this->conn->exec("delete from productos where idproducto=".$producto['idproducto']) ;
+                $this->conn->exec("delete from productos where idproducto=" . $producto['idproducto']);
             }
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
     }
- function borrarVacias() {
+
+    function borrarVacias() {
         try {
             $sql = "SELECT idcategoria FROM categorias left join productos using(idcategoria) where idproducto is null";
             $categorias = $this->conn->query($sql)->fetchAll();
             foreach ($categorias as $categoria) {
-               $this->conn->exec("delete from categorias where idcategoria=".$categoria['idcategoria']) ;
+                $this->conn->exec("delete from categorias where idcategoria=" . $categoria['idcategoria']);
             }
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
     }
+
 }
 
 $a = new Estadisticas();
 
 echo $a->totalCategorias();
 echo $a->totalProductos();
-echo $a->borrarHuerfanos(); 
-echo $a->borrarVacias(); 
+echo $a->borrarHuerfanos();
+echo $a->borrarVacias();

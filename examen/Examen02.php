@@ -87,7 +87,7 @@ class Producto {
     private $componentes = [];
 
     function __construct(string $nombre) {
-        $this->nombre=$nombre;
+        $this->nombre = $nombre;
     }
 
     function getMontaje() {
@@ -103,31 +103,35 @@ class Producto {
     }
 
     function coste() {
-        $importe=0;
-        foreach($this->componentes as $componente){
-            $importe+=$componente->precio;
+        $importe = 0;
+        foreach ($this->componentes as $componente) {
+            $importe += $componente->precio;
         }
-        $importe+=$this->montaje->horas*$this->montaje->empleado->preciohora;
+        if (!empty($this->montaje)) {
+            $importe += $this->montaje->horas * $this->montaje->empleado->preciohora;
+        }
         return $importe;
     }
+
     function __toString() {
-         $lista=$this->nombre;
-        foreach($this->componentes as $componente){
-            $lista.=" | ".$componente->nombre;
-        };
+        $lista = $this->nombre;
+        foreach ($this->componentes as $componente) {
+            $lista .= " | " . $componente->nombre;
+        }
         return $lista;
     }
+
 }
 
-$a=new Componentes("TR4","tornillo",10.0);
-$b=new Componentes("AT5","Arandela",15.0);
-$c=new Componentes("PY6","Pasador",20.0);
+$a = new Componentes("TR4", "tornillo", 10.0);
+$b = new Componentes("AT5", "Arandela", 15.0);
+$c = new Componentes("PY6", "Pasador", 20.0);
 
-$eva=new Empleado("Eva",30);
+$eva = new Empleado("Eva", 30);
 
-$atornillar=new Montaje($eva,2);
+$atornillar = new Montaje($eva, 2);
 
-$silla=new Producto("Silla");
+$silla = new Producto("Silla");
 $silla->setMontaje($atornillar);
 $silla->addComponente($b);
 $silla->addComponente($c);

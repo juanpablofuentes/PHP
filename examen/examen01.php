@@ -6,7 +6,7 @@ class Tareas {
     private $limite = 10;
     private $lista = [];
 
-    function __construct($responsable) {
+    function __construct(string $responsable) {
         $this->responsable = $responsable;
     }
 
@@ -23,7 +23,7 @@ class Tareas {
         $this->lista[] = $tarea;
     }
 
-    function procesar() {
+    function procesar():string {
         $tarea = array_shift($this->lista);
         return $tarea . " Realizada";
     }
